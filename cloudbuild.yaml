@@ -1,24 +1,11 @@
 steps:
-#- name: gcr.io/cloud-builders/git
-#  args: ['fetch', '--unshallow']
-- name: 'ubuntu'
-  args: ['ls', '-la', '.']
-#- name: 'ubuntu'
-#  args: ['rm', '-rf', 'public']
-#test
-- name: 'ubuntu'
-  args: ['ls', '-la', 'themes/casper/static/']
 - name: 'gcr.io/$PROJECT_ID/hugo'
   args: ['-t', 'casper','-v']
-- name: 'ubuntu'
-  args: ['ls', '-la', './public']
-#  args: ['--destination=/public/']
+#- name: 'ubuntu'
+#  args: ['ls', '-la', './public']
 - name: 'gcr.io/$PROJECT_ID/firebase'
   args: ['deploy']
   secretEnv: ['FIREBASE_TOKEN']
-#- name: 'gcr.io/$PROJECT_ID/hugo-on-fire'
-#  args: ['deploy']
-#  secretEnv: ['FIREBASE_TOKEN']
 secrets:
 - kmsKeyName: 'projects/robertsahlinblog/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-token'
   secretEnv:
