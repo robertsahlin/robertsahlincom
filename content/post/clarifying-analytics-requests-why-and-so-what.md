@@ -3,7 +3,6 @@ title: "Clarifying Analytics Requests = 5 x Why + So What"
 date: 2018-01-23T16:36:15+01:00
 draft: false
 tags: ["Method", "Analytics"]
-id: "2"
 ---
 
 Most analysts want to avoid a situation where they spend a lot of time working on ad-hoc, vague and misguided analytics/data requests instead of focusing on hypothesis testing. But hey, you will not be able to avoid those requests entirely, so what can you do in order to clarify the requests you can't hold at bay? I use two simple methods to clarify analytics requests:
