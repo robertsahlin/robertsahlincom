@@ -3,7 +3,6 @@ title: "Google Analytics Custom Dimension Alias in Bigquery"
 date: 2017-12-07T16:30:54+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics", "User Defined Functions"]
-id: "6"
 ---
 
 Second to being able to export your Google Analytics data to Google BigQuery, the feature I value the most with the premium version of GA is that you are not limited to 20 custom dimensions but have 200 to play with! However, if you have many custom dimensions, it quickly becomes hard to remember what dimension each index represents, the value isn't always selfdescribing. Hence being able to give the custom dimension a more descriptive identifier than an index could be useful.
