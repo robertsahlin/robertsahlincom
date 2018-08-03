@@ -3,7 +3,6 @@ title: "Bigquery Training Resources for Digital Analysts"
 date: 2017-12-15T10:33:33+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics", "Digital Analytics"]
-id: "1"
 ---
 
 In this post I've tried to collect different training resources that I've found useful for myself, some for free and some for a fee. The focus is using BigQuery for digital analytics. If you are one of the lucky digital analysts who work for an organisation with the 360 version of Google Analytics or Firebase Blaze, but not started using BigQuery? Then, don't wait for it, enable the BigQuery Export [(read this post if you are acting in EU)](https://robertsahlin.com/configure-google-analytics-bigquery-export-to-eu-region/) and learn how to use BigQuery.
