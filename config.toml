@@ -1,0 +1,43 @@
+baseurl = "https://robertsahlin.com/"
+copyright = "All rights reserved"
+#disqusshortname = "robertsahlin"
+languagecode = "en-US"
+paginate = 5
+pluralizelisttitles = false
+theme = "casper"
+title = "robertsahlin.com"
+[[menu.main]]
+identifier = "blog"
+name = "Blog"
+url = "/"
+weight = -120
+[[menu.main]]
+name = "Github repos"
+pre = "<h3>Follow me</h3>"
+url = "https://github.com/robertsahlin"
+weight = 100
+[[menu.main]]
+name = "Twitter timeline"
+url = "https://twitter.com/robertsahlin"
+weight = 101
+
+[params]
+author = "Robert Sahlin"
+authorlocation = "Stockholm, Sweden"
+authorwebsite = "https://robertsahlin.com"
+authorbio = "Digital Data Scientist and Engineer, Open source enthusiast."
+cover = "images/earth.jpg"
+description = "Building data products on Google Cloud Platform"
+githubName = "robertsahlin"
+linkedinName= "robertsahlin"
+googleAnalyticsUserID = "UA-xxxxx-yy"
+googleTagManagerId ="GTM-9Q8B"
+hideHUGOSupport = false
+logo = "images/robertsahlin-logo.jpg"
+twitterName = "robertsahlin"
+[permalinks]
+post = "/:slug/"
+[sitemap]
+ChangeFreq = ""
+Filename = "sitemap.xml"
+Priority = "-1"

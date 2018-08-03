@@ -1,0 +1,24 @@
+steps:
+#- name: gcr.io/cloud-builders/git
+#  args: ['fetch', '--unshallow']
+- name: 'ubuntu'
+  args: ['ls', '-la', '.']
+#- name: 'ubuntu'
+#  args: ['rm', '-rf', 'public']
+- name: 'ubuntu'
+  args: ['ls', '-la', 'themes/casper/static/']
+- name: 'gcr.io/$PROJECT_ID/hugo'
+  args: ['-t', 'casper','-v']
+- name: 'ubuntu'
+  args: ['ls', '-la', './public']
+#  args: ['--destination=/public/']
+- name: 'gcr.io/$PROJECT_ID/firebase'
+  args: ['deploy']
+  secretEnv: ['FIREBASE_TOKEN']
+#- name: 'gcr.io/$PROJECT_ID/hugo-on-fire'
+#  args: ['deploy']
+#  secretEnv: ['FIREBASE_TOKEN']
+secrets:
+- kmsKeyName: 'projects/robertsahlinblog/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-token'
+  secretEnv:
+    FIREBASE_TOKEN: 'CiQAi2+d7cLqTaozPVIenjyuDEdlloMl8Z6eQfvVeJ5GN7GC0AcSVgA3JWDtXkEhjssjSI+c1/7CW6QPGvQym/3WpBU/s2YsoQprXh9eW9AjIqRDz4PLprXT5UdSm8LxaYYeYoykbcsSNvZAdPfqHHy7O74SEbcgnZ8xE+fF'
