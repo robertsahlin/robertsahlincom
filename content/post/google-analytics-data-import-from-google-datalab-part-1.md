@@ -3,7 +3,6 @@ title: "Google Analytics Data Import From Google Datalab Part 1"
 date: 2018-01-11T09:04:27+01:00
 draft: true
 tags: ["Datalab", "BigQuery", "Google Analytics"]
-id: "7"
 ---
 
 I've been doing some analytics with [Google Datalab](https://cloud.google.com/datalab/) (easy to use interactive tool for data exploration, analysis, visualization and machine learning) the last year. My focus has been explorative analytics of the Google Analytics data that we export to BigQuery. But what is data science if we don't incorporate the data back into the real world to enrich the user experience? Hence I thought I would show how you to import your data insights back into Google Analytics.
