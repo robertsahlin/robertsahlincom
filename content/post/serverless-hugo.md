@@ -1,7 +1,7 @@
 ---
 title: "Serverless Static Blog: Hugo + Github + Cloud Build + Firebase"
-date: 2018-08-03T10:33:33+01:00
-draft: true
+date: 2018-08-03T16:33:33+01:00
+draft: false
 tags: ["Hugo", "Github", "Google Cloud Build", "Firebase"]
 ---
 
