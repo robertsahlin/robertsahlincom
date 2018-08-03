@@ -1,8 +1,6 @@
 steps:
 - name: 'gcr.io/$PROJECT_ID/hugo'
   args: ['-t', 'casper','-v']
-#- name: 'ubuntu'
-#  args: ['ls', '-la', './public']
 - name: 'gcr.io/$PROJECT_ID/firebase'
   args: ['deploy']
   secretEnv: ['FIREBASE_TOKEN']
