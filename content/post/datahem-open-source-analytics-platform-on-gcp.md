@@ -1,5 +1,5 @@
 ---
-title: "DataHem - open source, serverless, real-time and end-2-end ML pipeline on Google Cloud Platform"
+title: "DataHem: open source, serverless, real-time and end-2-end ML pipeline on Google Cloud Platform"
 date: 2018-06-01T10:33:33+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics", "DataHem", "Google Cloud Platform", "Apache Beam", "Open Source"]
