@@ -8,7 +8,7 @@ id: "4"
 
 **Updated 2018-04-23 with a fourth alternative - Unnest**
 
-Are you one of the lucky digital analysts that have a google analytics premium account? Then you know you can export your data to Google BigQuery and analyze it in an adhoc and explorative manner using SQL. One frequent use case for BigQuery is to analyze many custom dimensions at the same time. But there is a challenge in how to do that in BigQuery since it follows a nested/repeated pattern.
+Are you one of the lucky digital analysts that have a google analytics premium account? (If not, checkout the open source solution [DataHem](/datahem-open-source-serverless-real-time-and-end-2-end-ml-pipeline-on-google-cloud-platform/) to get premium features such as your GA data in BigQuery) Then you know you can export your data to Google BigQuery and analyze it in an adhoc and explorative manner using SQL. One frequent use case for BigQuery is to analyze many custom dimensions at the same time. But there is a challenge in how to do that in BigQuery since it follows a nested/repeated pattern.
 
 Let's use the [public google analytics sample "LondonCycleHelmet"](https://support.google.com/analytics/answer/3416091?hl=en) and say you want extract the custom dimensions 1-3 on hit level. I don't know what the dimensions represent so I've made up that they are productCategory, loyaltyClass and existingCustomer. So you want to see the named custom dimensions together with id:s for visitor, session and hit. Since custom dimensions are nested/repeated you need to use one of the following tricks to turn multiple rows into multiple columns:
 
