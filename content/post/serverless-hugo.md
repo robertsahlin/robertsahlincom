@@ -21,7 +21,7 @@ Initialize a local git in your project directory root (if not already done). Mak
 #### 4. Google Cloud Build
 Google Cloud Build has some [builders maintained by Google](https://github.com/GoogleCloudPlatform/cloud-builders) and [some builders are open-source and contributed by the community](https://github.com/GoogleCloudPlatform/cloud-builders-community). I use two community maintained builders, hugo and firebase. 
 
-Create a builders directory separate from your project directory, init git and clone the cloud-builders-community repo. 
+Create a builders directory separate from your project directory, init git and clone the cloud-builders-community repo by [following the instructions](https://github.com/GoogleCloudPlatform/cloud-builders-community). 
 
 ##### 4.1 Hugo Builder Image
 Go to the directory that has the source code for the hugo Docker image and build the image (make sure you have gcloud installed):
