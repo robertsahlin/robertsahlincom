@@ -30,13 +30,14 @@ $ cd cloud-builders-community/hugo
 $ gcloud builds submit --config cloudbuild.yaml .
 ```
 ##### 4.2 Firebase Builder Image
-There seem to be a bug in the firebase builder, so before you go on building the firebase image, remove the the line with secretEnv and change privilages on the firebase.bash to be executable.
+There seem to be a bug in the firebase builder, so before you go on building the firebase image, comment out or delete the line with secretEnv and change privilages on the firebase.bash to be executable.
 
 ```yaml
 #cloudbuild.yaml should look like this
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/firebase', '.']
+#  secretEnv: ['FIREBASE_TOKEN']
 images:
 - 'gcr.io/$PROJECT_ID/firebase'
 ```
@@ -52,7 +53,6 @@ Now it's time to create a build configuration file. Go to you project directory 
 ```yaml
 steps:
 - name: 'gcr.io/$PROJECT_ID/hugo'
-  args: ['-t', 'casper','-v']
 - name: 'gcr.io/$PROJECT_ID/firebase'
   args: ['deploy']
   secretEnv: ['FIREBASE_TOKEN']
