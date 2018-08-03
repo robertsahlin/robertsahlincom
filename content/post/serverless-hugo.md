@@ -1,5 +1,5 @@
 ---
-title: "Serverless Static Blog: Hugo + Github + Cloud Build + Firebase"
+title: "Serverless Static Blog powered by Hugo, Github, Cloud Build and Firebase"
 date: 2018-08-03T16:33:33+01:00
 draft: false
 tags: ["Hugo", "Github", "Google Cloud Build", "Firebase"]
