@@ -5,6 +5,7 @@ steps:
   args: ['ls', '-la', '.']
 #- name: 'ubuntu'
 #  args: ['rm', '-rf', 'public']
+#test
 - name: 'ubuntu'
   args: ['ls', '-la', 'themes/casper/static/']
 - name: 'gcr.io/$PROJECT_ID/hugo'
