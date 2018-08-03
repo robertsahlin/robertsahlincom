@@ -4,7 +4,6 @@ date: 2017-10-30T15:45:30+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics"]
 cd1: "test"
-id: "5"
 ---
 
 **(Updated 2018-01-23):** Google has now included my input in [the GA360 BigQuery Export documentation](https://support.google.com/analytics/answer/3416092?hl=en#step2.1) for how to geolocate your data in EU.
