@@ -11,7 +11,7 @@ In this post I've tried to collect different training resources that I've found 
 Basic SQL skills helps and getting your head around nested data can be tricky, but it is well worth it. I've used BigQuery for digital analytics a few years now and seen an already powerful tool evolve further with more features. Hence I thought I would share some tips on training resources I’ve found useful myself, some for free and some for a fee.
 
 #### Google Analytics Sample Dataset for BigQuery
-The [sample dataset](https://support.google.com/analytics/answer/7586738?hl=en) contains Google Analytics 360 data from the [Google Merchandise Store](https://shop.googlemerchandisestore.com), a real ecommerce store. (I requested this long ago and since spring 2018 it's finally available).
+* The [sample dataset](https://support.google.com/analytics/answer/7586738?hl=en) contains Google Analytics 360 data from the [Google Merchandise Store](https://shop.googlemerchandisestore.com), a real ecommerce store. (I requested this long ago and since spring 2018 it's finally available).
 
 #### Google Developers Codelabs
 
