@@ -3,7 +3,6 @@ title: "Flatten Google Analytics Custom Dimensions with a BigQuery UDF"
 date: 2017-10-30T16:35:11+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics", "UDF"]
-id: "4"
 ---
 
 **Updated 2018-04-23 with a fourth alternative - Unnest**
