@@ -3,7 +3,6 @@ title: "Flatten Firebase Properties and Parameters in Bigquery"
 date: 2017-12-08T16:25:20+01:00
 draft: false
 tags: ["BigQuery", "Firebase", "UDF"]
-id: "3"
 ---
 
 At Google I/O May 2017, [Firebase](https://firebase.google.com/) announced [Google Analytics for Firebase](https://firebase.google.com/products/analytics/), a fantastic tool that automatically captures data on how people are using your iOS and Android app and lets you define your own custom app events. Like Google Analytics 360, it offers the ability to export raw data to Google BigQuery for custom analysis. There are a few posts on [Google Cloud Platform Blog](https://cloudplatform.googleblog.com/2016/09/using-BigQuery-and-Firebase-Analytics-to-understand-your-mobile-app.html) and [Firebase Blog](https://firebase.googleblog.com/2017/03/bigquery-tip-unnest-function.html) on how to query the Firebase dataset, but none of them giving much advise on how to analyze multiple properties and parameters at the same time. The reason why it is a bit tricky is that the dataset makes use of arrays of structs to flexibly accomodate user properties and event parameters. This is how the structure looks like:
