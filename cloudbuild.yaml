@@ -9,4 +9,4 @@ steps:
 secrets:
 - kmsKeyName: 'projects/robertsahlinblog/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-token'
   secretEnv:
-    FIREBASE_TOKEN: 'CiQAi2+d7cLqTaozPVIenjyuDEdlloMl8Z6eQfvVeJ5GN7GC0AcSVgA3JWDtXkEhjssjSI+c1/7CW6QPGvQym/3WpBU/s2YsoQprXh9eW9AjIqRDz4PLprXT5UdSm8LxaYYeYoykbcsSNvZAdPfqHHy7O74SEbcgnZ8xE+fF'
+    FIREBASE_TOKEN: 'CiQAi2+d7YudYIJRK2vYEcmZW5N4hedQFJ1yeq/G+FGemjTLT0wSVgA3JWDt4IxwWKxtfse0/QoEWROndlCRZHmgvRYJCejfFnBkCL5pNGuu/K0K7wqIxErGMm3LifpWzGsF5W/bI/DU1HXygycsep8NI5zZXiy4v/lj2Lsh'
