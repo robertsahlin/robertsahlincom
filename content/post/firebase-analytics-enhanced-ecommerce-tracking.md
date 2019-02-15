@@ -5,7 +5,7 @@ draft: false
 tags: ["Firebase Analytics", "Ecommerce"]
 ---
 
-I recently implemented firebase analytics tracking in MatHem's native apps and in that process I discovered that the [documentation about tracking e-commerce](https://support.google.com/firebase/answer/6317499?hl=en) is very limited compared to how to implement it in Google Analytics. Hence, I thought I would share our implementation of Firebase Analytics.
+I recently implemented firebase analytics tracking in MatHem's native apps and in that process I discovered that the [documentation about tracking e-commerce](https://support.google.com/firebase/answer/6317499?hl=en) is very limited compared to how to implement it in Google Analytics. Also, the events and parameters in the documentation didn't fit our needs for analyzing e-commerce interactions. Hence, I thought I would share our implementation of Firebase Analytics.
 
 First, Firebase Analytics has a completely different data model than Google Analytics. It is much more flexible and basically you log events with corresponding parameters or you log user properties. The current limits are:
 * 500 distinct events per app (automatically collected events excluded)
