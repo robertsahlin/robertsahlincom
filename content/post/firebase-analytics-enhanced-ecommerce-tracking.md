@@ -1,5 +1,5 @@
 ---
-title: "Firebase Analytics e-commerce tracking"
+title: "Firebase Analytics enhanced e-commerce tracking"
 date: 2019-02-15T7:50:33+01:00
 draft: false
 tags: ["Firebase Analytics", "Ecommerce"]
