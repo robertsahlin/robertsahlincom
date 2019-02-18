@@ -26,6 +26,7 @@ function(){
 However, when performing a QA-check of the beacon method I noticed that 5-10% less hits were reported compared to Google Analytics using the image method. 
 
 The difference initialized a closer investigation comparing individual hits in Google Analytics and DataHem. The majority of dropped hits in DataHem stemmed from:
+
 1. Samsung browser: ~40%
 2. Safari in-app (i.e facebook, instagram and google search app): ~25% 
 3. Chrome on iOS (iPad & iPhone): ~20%
