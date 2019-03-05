@@ -13,7 +13,10 @@ And I will show you why. Campaign timeout settings tells Google Analytics for ho
 
 Changing the campaign timeout settings can have a huge impact on standard reports as you can see in the screenshot below where I compare default 6 months against 1 day.
 
+![Campaign timeout settings impact on standard reports](/images/standard-reports.png)
 
 A similar comparison in the attribution model comparison report shows nearly no change using a Last Non-Direct Click model (different periods are compared, else it would result in the same metrics).
+
+![Campaign timeout settings impact on attribution model comparison reports](/images/attribution-comparison-reports.png)
 
 The weird thing is that the campaign timeout settings is most likely a legacy from a time where cookies were used to set up an attribution model (last non-direct click) that was a bit more sophisticated than last click. But times have changed and the possibilities to analyze attribution today are near to limitless and not dependent on a last non-direct cookie. Hence, we have a setting that doesn't affect what it was invented for but only messing up all other reports. I guess you could speculate why it still exist and whatever reason you come up with it is still a fact that players (Google is one of them) that own a lot of traffic on the internet will benefit from exaggerated attribution caused by the default settings.
