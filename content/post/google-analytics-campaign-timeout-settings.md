@@ -1,6 +1,6 @@
 ---
 title: "Google Analytics Campaign Timeout Settings"
-date: 2019-03-05T17:50:33+01:00
+date: 2019-03-05T16:00:33+01:00
 draft: false
 tags: ["Google Analytics", "Settings"]
 ---
