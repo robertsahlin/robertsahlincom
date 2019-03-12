@@ -234,7 +234,7 @@ function get(p,o){
     params.transaction_currency = 'SEK';
     params.value = get(['purchase', 'actionField', 'revenue'], {{dl ecommerce}});
     params.currency = 'SEK';
-    logEvent('ecommerce_transaction', params); //Don't use ecommerce_purchase since it is a pre-defined event
+    logEvent('ecommerce_transaction', params); //Don't use ecommerce_purchase since it is a pre-defined constant
   } catch(e) {console.log(e);}
 
 try {
