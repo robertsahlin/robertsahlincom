@@ -12,7 +12,9 @@ First, Firebase Analytics has a completely different data model than Google Anal
 * 25 event parameters per event
 * 25 user properties per app
 
-This is usually more than enough. However, due to the flexibility, it requires more careful consideration how to structure the implementation. This is what we ended up with (examples for android), I hope you find it useful:
+This is usually more than enough. However, due to the flexibility, it requires more careful consideration how to structure the implementation. This is what we ended up with (examples for android), I hope you find it useful.
+
+Also, if you at some point in the customer journey switch to a webview in your native app, [consider to log all numbers as doubles rather than mixing integers and doubles due to javascript representaion of numbers](https://robertsahlin.com/firebase-logevents-as-doubles-in-a-webview/).
 
 #### Product impression
 ```java
