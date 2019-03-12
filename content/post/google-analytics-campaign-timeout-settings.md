@@ -5,7 +5,7 @@ draft: false
 tags: ["Google Analytics", "Settings"]
 ---
 
-Pretty much every Google Analytics configuration I've seen have left the default Campaign Timeout Settings untouched. Also, it came to my knowledge that the tutor/s (representing a renowned digital analytics consultancy and Google Analytics partner) at the biggest digital analytics post-secondary education in Sweden instruct the students to keep the default settings. Hence, I feel obliged to write a post to clarify why you shouldn't.
+Pretty much every Google Analytics configuration I've seen have left the default Campaign Timeout Settings untouched. Also, it came to my knowledge that the tutor/s at the biggest digital analytics post-secondary education in Sweden instruct the students to keep the default settings. Hence, I feel obliged to write a post to clarify why you shouldn't.
 
 ### Keeping default campaign settings is just plain wrong and will mess up your traffic data in all reports except attribution model comparison tool!
 
@@ -24,3 +24,12 @@ Are you convinced that you should change the default settings to something much 
 ### I usually set campaign timeout settings to 1 day since a new session is started at midnight every day anyway
 
 The weird thing is that the campaign timeout settings is most likely a legacy from a time where cookies were used to set up an attribution model (last non-direct click) that was a bit more sophisticated than last click. But times have changed and the possibilities to analyze attribution today are near to limitless and not dependent on a last non-direct cookie. Hence, we have a setting that doesn't affect what it was invented for but only messing up all other reports. I guess you could speculate why it still exist and whatever reason you come up with it is still a fact that players (Google is one of them) that own a lot of traffic on the internet will benefit from exaggerated attribution caused by the default settings.
+
+### Warning
+Be aware that if you use google analytics to transfer conversions to Google Ads, changing the campaign timeout settings probably affect the number of transactions in Google Ads. The documentation says that conversions/transactions are transfered to Google Ads according to a last non-direct click (LNDC) attribution model in Google Analytics but it doesn't seem to be the model from the attribution modeling report but rather a LNDC attribution based on campaign timeout settings (like old school cookie attribution). Hence, there is a conflict between setting campaign timeout for optimizing the site and optimizing your Google Ads. 
+
+Alternative solutions include:
+1. Sending hits to 2 properties (one for site optimizations and one for Google Ads).
+2. Use Google Ads tracking script to measure conversions/transactions.
+3. Use another bidding tool for google ads.
+4. USe another tool for web analytics / site optimizations.
