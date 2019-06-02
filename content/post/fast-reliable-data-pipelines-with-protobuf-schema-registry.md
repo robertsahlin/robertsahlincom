@@ -5,20 +5,31 @@ draft: true
 tags: ["DataHem", "Protobuf", "Apache Beam"]
 ---
 
-MatHem is growing quickly and so are the requirements for fast and reliable data pipelines. Since I joined the company a little more than one year ago I've been developing an event streaming platform (named DataHem) which meets those requirements. 
+MatHem is growing quickly and so are the requirements for fast and reliable data pipelines. Since I joined the company a little more than one year ago I've been developing an event streaming platform (named DataHem) to meet those requirements. 
 
-## Context
+# Context
 MatHem is the biggest online grocery store in Sweden and to briefly give a context this is how the business works:
 1. A customer orders groceries online in one of our digital channels (we have no physical stores).
 2. The order is picked in one of our 3 warehouses located in the 3 biggest cities in Sweden, covering 65% of the Swedish population.
 3. The groceries are loaded in one of our 200 cars (or 3 boats) and delivered to the customer (even to your jetty if you're in the Stockholm archipelago)
 
-Data is generated and collected in all of these steps as well as in the areas of supply, pricing, product assortment, content production, etc.
+Data is generated and collected in all of these steps as well as in the areas of supply, pricing, product assortment, content production, etc. Hence, data is embraced as a first-class citizen at MatHem and critical to generate advantages in a competitive market.
 
 # Requirements
-A major design goal has been to treat data as streams of immutable data objects (log) with strong contracts and publish the objects (orders, products, members, car temperatures, etc.) when they are created, modified or deleted. By doing so enable us to meet business requirements on:
+A major design goal has been to treat data as streams of immutable data objects (log) and publish the objects (orders, products, members, car temperatures, etc.) when they are created, modified or deleted. The data pipelines apply strong contracts early in the process. Following this pattern enable us to meet business requirements on:
 1. Scalability and complexity - Our quickly growing business also means our data platform needs to keep up with not only the ever-growing volumes of data but also the number of data sources and increasing complexity of our systems. 
-2. No-ops - the data engineering team is small (1,5 FTE) and we need to make sure that our time is efficiently used and adding new data sources requires a minimum of work to set up and maintain.
-3. Synergies and down-stream dependencies - achieve synergies by collecting data once and use it for multiple purposes (reports, dashboards, analytics, machine learning and data products) and make sure that data products down-stream don't break when upstream data model evolves.
+2. No-ops and synergies - the data engineering team is small (1,5 FTE) and we need to make sure that our time is efficiently used and adding new data sources requires a minimum of work to set up and maintain. We also strive for synergies by collecting data once and use it for multiple purposes (reports, dashboards, analytics, machine learning and data products).
+3. Data quality and down-stream dependencies - and make sure that data products down-stream don't break when the upstream data model evolves.
 
-## Solution
+# Solution
+
+## Data sources
+Understanding the source of the data is the first thing to start with. At MatHem, most business related data is produced by our IT development teams. Their data is used heavily in the Data Science team to discover business insights and to better serve our customers. Most of MatHem's frontend and backend runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime.
+
+To summarize, the following data sources need to be supported.
+
+1. HTTP Requests (GET/POST)
+2. AWS SNS
+3. AWS Kinesis
+
+## Data destinations
