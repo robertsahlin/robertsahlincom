@@ -17,9 +17,9 @@ Data is generated and collected in all of these steps as well as in the areas of
 
 # Requirements
 A major design goal has been to treat data as streams of immutable data objects (log) and publish the objects (orders, products, members, car temperatures, etc.) when they are created, modified or deleted. The data pipelines apply strong contracts early in the process. Following this pattern enable us to meet business requirements on:
-1. Scalability and complexity - Our quickly growing business also means our data platform needs to keep up with not only the ever-growing volumes of data but also the number of data sources and increasing complexity of our systems. 
+1. Scalability and flexibility - Our quickly growing business also means our data platform needs to keep up with not only the ever-growing volumes of data but also the number of data sources and increasing complexity of our systems. 
 2. No-ops and synergies - the data engineering team is small (1,5 FTE) and we need to make sure that our time is efficiently used and adding new data sources requires a minimum of work to set up and maintain. We also strive for synergies by collecting data once and use it for multiple purposes (reports, dashboards, analytics, machine learning and data products).
-3. Data quality and down-stream dependencies - and make sure that data products down-stream don't break when the upstream data model evolves.
+3. Data quality and resilience - make sure that data products down-stream don't break when the upstream data model evolves.
 
 # Solution
 
