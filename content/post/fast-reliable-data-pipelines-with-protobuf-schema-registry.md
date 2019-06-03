@@ -24,7 +24,7 @@ A major design goal has been to treat data as streams of immutable data objects 
 # Solution
 
 ## Data sources
-Understanding the source of the data is the first thing to start with. At MatHem, most business related data is produced by our IT development teams. Their data is used heavily in the Data Science team to discover business insights and to better serve our customers. Most of MatHem's frontend and backend runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime.
+Understanding the source of the data is fundamental. At MatHem, most business related data is produced by our IT development teams. Their data is extensively used by the Data Science team to discover business insights and to build data products that better serve our customers. Most of MatHem's frontend and backend is built on micro-services and runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime.
 
 To summarize, the following data sources need to be supported.
 
