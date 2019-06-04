@@ -24,7 +24,7 @@ A major design goal has been to treat data as streams of immutable data objects 
 # Solution
 
 ## Data sources
-Understanding the source of the data is fundamental. At MatHem, most business related data is produced by our IT development teams. Their data is extensively used by the Data Science team to discover business insights and to build data products that better serve our customers. Most of MatHem's frontend and backend is built on micro-services and runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime.
+Understanding the source of the data is fundamental. At MatHem, most business related data is produced by our IT development teams. Their data is extensively used by the Data Science team to discover business insights and to build data products that better serve our customers. Most of MatHem's frontend and backend is built on micro-services and runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime. However, the data that is passed around is in JSON format and 
 
 To summarize, the following data sources need to be supported.
 
@@ -33,3 +33,4 @@ To summarize, the following data sources need to be supported.
 3. AWS Kinesis
 
 ## Data destinations
+To satisfy our main use cases; reporting, adhoc/explorative analysis, visualizations and ML/Data products we land the processed data objects in our data warehouse (BigQuery) and as streams (PubSub). Authentication and authorization is set close to the data warehouse to allow users to use their tool of choice (if it supports BigQuery) for adhoc/explorative analysis. Hence, we need to set permissions on field level but also descriptions of each field. Think if we could apply a schema
