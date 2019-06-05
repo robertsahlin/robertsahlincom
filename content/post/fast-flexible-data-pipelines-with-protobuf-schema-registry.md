@@ -36,13 +36,13 @@ To summarize, the following data sources need to be supported:
 ## Data collection
 We use different GCP services as data collectors, all of them publish the JSON payload and meta data as pubsub messages. Each message type has its own pubsub topic and each topic has two subscriptions, one for backup and one for enrichment. 
 
-### AWS Kinesis collector
+#### AWS Kinesis collector
 For high volume streams from AWS we use dataflow/Apache Beam to read from AWS Kinesis. AWS user and secret are encrypted in GCP KMS to avoid accidental exposure of credentials.
 
-### AWS SNS HTTP Subscriber collector
+#### AWS SNS HTTP Subscriber collector
 For lower volume and small bursts of data from AWS we use cloud functions to read data from AWS SNS. The cloud function collector routes the incoming messages based on a query parameter, hence we can reuse the same cloud function endpoint for many HTTP SNS subscriptions and minimize operations.
 
-### HTTP collector
+#### HTTP collector
 For data that is collected as HTTP GET or POST requests we use AppEngine standard. Our HTTP collector enable us to collect data from user interactions on our web application (we send all Google Analytics hits to our HTTP collector) and from third party service webhooks (like survey monkey forms). 
 
 ## Data processing
@@ -56,5 +56,5 @@ To satisfy our main use cases; reporting, adhoc/explorative analysis, visualizat
 ## Data backup
 All raw data is streamed to a BigQuery dataset using dataflow jobs. The backup data is partitioned by ingestion time and have meta data (source, UUID, timestamp, etc.) in an attributes map that makes it easy to locate unique rows without parsing the raw data field (BYTES[]). Then a backfill is just a dataflow batch job that accepts a SQL-query and publish the data on the pubsub to be consumed by the streaming processing job together with the current data. The backfill data includes a message attribute that informs that it is a backfill entity and hence is filtered out from being written to the backup table again.
 
-## Summary
+# Summary
 If you're a data engineer and find this post interesting, don't hesitate to reach out knowing that we've open data engineer positions at MatHem.
