@@ -1,5 +1,5 @@
 ---
-title: "Fast and reliable data pipelines with protobuf schema registry"
+title: "Fast and flexible data pipelines with protobuf schema registry"
 date: 2019-05-31T7:50:33+01:00
 draft: true
 tags: ["DataHem", "Protobuf", "Apache Beam"]
@@ -24,7 +24,7 @@ A major design goal has been to treat data as streams of immutable data objects 
 # Solution
 
 ## Data sources
-Understanding the source of the data is fundamental. At MatHem, most business related data is produced by our IT development teams. Their data is extensively used by the Data Science team to discover business insights and to build data products that better serve our customers. Most of MatHem's frontend and backend is built on micro-services and runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime. However, the data that is passed around is in JSON format and 
+Understanding the source of the data is fundamental. At MatHem, most business related data is produced by our IT development teams. Their data is extensively used by the Data Science team to discover business insights and to build data products that better serve our customers. Most of MatHem's frontend and backend is built on micro-services and runs on AWS and the developers use AWS SNS and Kinesis as their prefered message channels. These channels are some of the the most important data sources for us. We also have various clients (mobile apps & web) and third party services (webhooks) generating events data that are collected in realtime. However, the incoming data is in JSON format and we want strong contracts early on. Hence, we transform the JSON to protobuf that is available in many programming languages, has efficient serialization and supports schema evolution. All data objects also get meta data such as source, UUID and a timestamp as attributes.
 
 To summarize, the following data sources need to be supported.
 
@@ -33,4 +33,7 @@ To summarize, the following data sources need to be supported.
 3. AWS Kinesis
 
 ## Data destinations
-To satisfy our main use cases; reporting, adhoc/explorative analysis, visualizations and ML/Data products we land the processed data objects in our data warehouse (BigQuery) and as streams (PubSub). Authentication and authorization is set close to the data warehouse to allow users to use their tool of choice (if it supports BigQuery) for adhoc/explorative analysis. Hence, we need to set permissions on field level but also descriptions of each field. Think if we could apply a schema
+To satisfy our main use cases; reporting, adhoc/explorative analysis, visualizations and ML/Data products we write the processed data objects to our data warehouse (BigQuery) and as streams (PubSub). Authentication and authorization of users is done close to the data warehouse to allow users to use their tool of choice (if it supports BigQuery) for adhoc/explorative analysis. Different roles in the company have different permissions to data Hence, we need to set permissions on field level but also descriptions of each field. Think if we could apply a schema
+
+## Data backup
+All raw data is streamed to a BigQuery dataset using dataflow jobs. The backup data is partitioned by ingestion time and have meta data (source, UUID, timestamp, etc.) in an attributes map that makes it easy to locate unique rows without parsing the raw data field (BYTES[]). Then a backfill is just a dataflow batch job that accepts a SQL-query and publish the data on the pubsub to be consumed by the streaming processing job together with the current data. The backfill data includes a message attribute that informs that it is a backfill entity and hence is filtered out from being written to the backup table again.
