@@ -2,7 +2,7 @@
 title: "Fast and flexible data pipelines with protobuf schema registry"
 date: 2019-05-31T7:50:33+01:00
 draft: true
-tags: ["DataHem", "Protobuf", "Apache Beam"]
+tags: ["DataHem", "Protobuf", "Apache Beam", "BigQuery", "Dataflow"]
 ---
 
 MatHem is growing quickly and so are the requirements for fast and reliable data pipelines. Since I joined the company a little more than one year ago I've been developing an event streaming platform (named DataHem) to meet those requirements. 
