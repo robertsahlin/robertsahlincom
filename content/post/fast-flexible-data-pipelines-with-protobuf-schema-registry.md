@@ -1,11 +1,11 @@
 ---
 title: "Fast and flexible data pipelines with protobuf schema registry"
 date: 2019-05-31T7:50:33+01:00
-draft: true
+draft: false
 tags: ["DataHem", "Protobuf", "Apache Beam", "BigQuery", "Dataflow"]
 ---
 
-MatHem is growing quickly and so are the requirements for fast and reliable data pipelines. Since I joined the company a little more than one year ago I've been developing an event streaming platform (named DataHem) to meet those requirements. 
+[MatHem](https://www.mathem.se/) is growing quickly and so are the requirements for fast and reliable data pipelines. Since I joined the company a little more than one year ago I've been developing an event streaming platform (named DataHem) to meet those requirements. 
 
 # 1 Background
 Before jumping into the solution architecture, I thought I would give you some background from a business perspective that has influenced the design choices.
@@ -64,6 +64,8 @@ To illustrate that by example. One of our field level options is used to define 
 
 Since we want to be able to use the same generic Beam pipline to process different message types we use protobuf dynamic messages rather than the corresponding java classes, hence the schema registry and no need to recompile pipelines when adding new message types. The pipeline can even be packaged as a cloud build job executing a container image that runs a fat jar and pull that from google container registry.
 
+Data is written in realtime (< 5 seconds delay) to the staging table that is partitioned by ingestion time. At a defined schedule we merge data into reporting tables clustered on fields that optimize query performance. The merge into reporting tables allows us to avoid duplicates in situations when there is a backfill either from our backup tables or if the backfill stems from the data source that is outside control of the data engineering team. Queries that require realtime data runs against views that use analytical functions over the staging table or a union of the staging table and the reporting table.
+
 ## 2.4 Data destinations
 To satisfy our main use cases; reporting, adhoc/explorative analysis, visualizations and ML/Data products we write the processed data objects to our data warehouse (BigQuery) and as streams (PubSub). Authentication and authorization of users is done close to the data warehouse to allow users to use their tool of choice (if it supports BigQuery) for adhoc/explorative analysis. Different roles in the company have different permissions to data fields. Hence, we need to set permissions on field level but also descriptions of each field.
 
@@ -71,4 +73,8 @@ To satisfy our main use cases; reporting, adhoc/explorative analysis, visualizat
 All raw data is streamed to a BigQuery dataset using dataflow jobs. The backup data is partitioned by ingestion time and have meta data (source, UUID, timestamp, etc.) in an attributes map that makes it easy to locate unique rows without parsing the raw data field (BYTES[]). Then a backfill is just a dataflow batch job that accepts a SQL-query and publish the data on the pubsub to be consumed by the streaming processing job together with the current data. The backfill data includes a message attribute that informs that it is a backfill entity and hence is filtered out from being written to the backup table again.
 
 # 3 Summary
-If you're a data engineer and find this post interesting, don't hesitate to reach out knowing that we've open data engineer positions at MatHem. Also, I would like to mention Alex van Boxel who generously has offered invaluable guidance in how to read options from dynamic protobuf messages. I recommend you to keep an eye on his work on metastore and protobeam. In fact, DataHem depends on some of Alex's code (ProtoDescriptor) and some modifications of it (ProtoLanguageFileWriter) to parse protobuf dynamic message options.
+This is an overview of DataHem's architecture to meet MatHem's requirements while taking the data engineering prerequisites in consideration.
+
+If you're a data engineer and find this post interesting, don't hesitate to reach out knowing that we've open data engineer positions at MatHem. 
+
+Also, I would like to mention [Alex van Boxel](https://twitter.com/alexvb) who generously has offered invaluable guidance in how to read options from dynamic protobuf messages. I recommend you to keep an eye on his work on [metastore](https://github.com/anemos-io/metastore) and [protobeam](https://github.com/anemos-io/protobeam). In fact, DataHem depends on some of Alex's code (ProtoDescriptor) and some modifications of it (ProtoLanguageFileWriter) to parse protobuf dynamic message options.
