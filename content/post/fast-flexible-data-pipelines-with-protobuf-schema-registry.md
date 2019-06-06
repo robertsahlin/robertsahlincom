@@ -12,20 +12,28 @@ Before jumping into the solution architecture, I thought I would give you some b
 
 ## 1.1 Context
 MatHem is the biggest online grocery store in Sweden and to briefly give a context this is how the business works:
+
 1. A customer orders groceries online in one of our digital channels (we have no physical stores).
+
 2. The order is picked in one of our 3 warehouses located in the 3 biggest cities in Sweden, covering 65% of the Swedish population.
+
 3. The groceries are loaded in one of our 200 cars (or 3 boats) and delivered to the customer (even to your jetty if you're in the Stockholm archipelago)
 
 Data is generated and collected in all of these steps as well as in the areas of supply, pricing, product assortment, content production, etc. Hence, data is embraced as a first-class citizen at MatHem and critical to generate advantages in a competitive market.
 
 ## 1.2 Requirements
-The major business requirements on DataHem are:
-1. Scalability and flexibility - Our quickly growing business also means our data platform needs to keep up with not only the ever-growing volumes of data but also the number of data sources and increasing complexity of our systems. 
-2. No-ops and synergies - the data engineering team is small and we need to make sure that our time is efficiently used and adding new data sources requires a minimum of work to set up and maintain. We also strive for synergies by collecting data once and use it for multiple purposes (reports, dashboards, analytics, machine learning and data products).
-3. Data quality and resilience - make sure that reports and data products down-stream don't break when the upstream data model evolves.
-4. Availability and security - users should be able to easily interact with data with their tool of choice while ensuring fine grade access control on field level.
-5. Full control and ownership of data - backfill, delete data
 
+The major business requirements on DataHem are:
+
+1. Scalability and flexibility - Our quickly growing business also means our data platform needs to keep up with not only the ever-growing volumes of data but also the number of data sources and increasing complexity of our systems. 
+
+2. No-ops and synergies - the data engineering team is small and we need to make sure that our time is efficiently used and adding new data sources requires a minimum of work to set up and maintain. We also strive for synergies by collecting data once and use it for multiple purposes (reports, dashboards, analytics, machine learning and data products).
+
+3. Data quality and resilience - make sure that reports and data products down-stream don't break when the upstream data model evolves.
+
+4. Availability and security - users should be able to easily interact with data with their tool of choice while ensuring fine grade access control on field level.
+
+5. Full control and ownership of data - backfill and delete individual data records
 
 # 2. Solution
 In order to meet the requirements we've built DataHem, a serverless real-time end-2-end data pipeline built entirely on GoogleCloud Platform services. A major design goal has been to treat data as streams of immutable data objects (log) and publish the objects (orders, products, members, car temperatures, etc.) when they are created, modified or deleted. The data pipelines apply strong contracts early in the process by using protobuf. The central pieces of the solution are the protobuf schemas that contains meta data (options) and the generic dataflow/beam pipeline that use the meta data to process each message type accordingly. 
@@ -40,7 +48,9 @@ Understanding the source of the data is fundamental. At MatHem, most business re
 To summarize, the following data sources need to be supported:
 
 1. HTTP Requests (GET/POST)
+
 2. AWS SNS
+
 3. AWS Kinesis
 
 ## 2.2 Data collection
@@ -78,3 +88,5 @@ This is an overview of DataHem's architecture to meet MatHem's requirements whil
 If you're a data engineer and find this post interesting, don't hesitate to reach out knowing that we've open data engineer positions at MatHem. 
 
 Also, I would like to mention [Alex van Boxel](https://twitter.com/alexvb) who generously has offered invaluable guidance in how to read options from dynamic protobuf messages. I recommend you to keep an eye on his work on [metastore](https://github.com/anemos-io/metastore) and [protobeam](https://github.com/anemos-io/protobeam). In fact, DataHem depends on some of Alex's code (ProtoDescriptor) and some modifications of it (ProtoLanguageFileWriter) to parse protobuf dynamic message options.
+
+Kudos also to my fellow data engineering colleague David Raimosson for being an excellent sounding board and supporting with data domain knowledge and awesome SQL optimizations.
