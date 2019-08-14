@@ -1,6 +1,6 @@
 ---
 title: "Configure Firebase Analytics and Google Analytics app + web Bigquery export to EU region"
-date: 2018-08-14T15:45:30+01:00
+date: 2018-08-14T13:45:30+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics"]
 ---
