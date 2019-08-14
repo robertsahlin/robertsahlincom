@@ -11,8 +11,8 @@ When you activate/link BigQuery export in Firebase a dataset will be created in 
 
 Hence, the solution is to:
 
-1. Setup the export in Firebase Analytics / Google Analytics app + web
-2. Create a dataset in your firebase project in Bigquery with your analytics_NNNNNNNNN name and EU as the region before the first export is executed. 
+1. Activate/link the BigQuery export in your Firebase project
+2. Go to BigQuery and create a dataset under your Firebase project using your analytics_NNNNNNNNN name and EU as the region before the first export is executed. 
 3. Wait and voila - your data starts pouring into your Bigquery dataset in the EU region!
 
 The way the export works is that it first looks for a dataset with the ID and if it doesn't already exist then a dataset is created in the default region, i.e. US.
