@@ -1,6 +1,6 @@
 ---
 title: "Why Google Analytics App + Web BigQuery Export Rocks and Sucks"
-date: 2019-09-02T15:45:30+01:00
+date: 2019-09-02T13:45:30+01:00
 draft: false
 tags: ["BigQuery", "Google Analytics", "Firebase Analytics"]
 ---
