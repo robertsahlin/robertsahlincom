@@ -18,4 +18,4 @@ Google has chosen a data model that is commonly known as entity-attribute-value.
 
 But this is not the only challenge. The schema is so flexible that the analyst/engineer doesn't even know what events (and associated attributes/values) are in the table without proper documenation or executing a query that returns event names and associated attributes/values, and to be sure you catch them all you need to scan all the partitions. Another challenge is that since all events have the exact same schema you can't set column based access rights on that table.
 
-I can understand why Google chose this model, it is not uncommon for vendors that offer a solution to clients with very different entities. However, as a data engineer I would have preferred a solution where I can apply my own schema and define my own events and attributes.
+I can understand why Google chose this model, it is not uncommon for vendors that offer a generic solution to clients with very different entities. However, as a data engineer I would have preferred a solution where I can apply my own schema and define my own events and attributes.
