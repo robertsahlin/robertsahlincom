@@ -5,7 +5,7 @@ draft: false
 tags: ["BigQuery", "Google Analytics", "Firebase Analytics"]
 ---
 
-As I mentioned in my earlier post about the drawbacks with the entity-attribute-value data model used in Firebase Analytics and Google Analytics app plus web, it is hard to know what events and associated attributes and data types are logged without proper documentation. Another way to get an overview is to actually query the table. Below you find an example of how to do it.
+As I mentioned in my earlier [post about the drawbacks with the entity-attribute-value data model](https://robertsahlin.com/why-google-analytics-app---web-bigquery-export-rocks-and-sucks/) used in Firebase Analytics and Google Analytics app plus web, it is hard to know what events and associated attributes and data types are logged without proper documentation. Another way to get an overview is to actually query the table. Below you find an example of how to do it.
 
 ```SQL
 SELECT * FROM(
