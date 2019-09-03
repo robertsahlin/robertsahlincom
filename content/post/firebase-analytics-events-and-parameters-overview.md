@@ -25,4 +25,74 @@ SELECT
 GROUP BY event_name
 ORDER BY event_name asc
 ```
+
+That would return something like below (in JSON format)
+```JSON
+[
+  {
+    "event_name": "app_clear_data",
+    "attribute": [
+      {
+        "name": "firebase_event_origin",
+        "value": "string"
+      }
+    ]
+  },
+  {
+    "event_name": "app_remove",
+    "attribute": [
+      {
+        "name": "engaged_session_event",
+        "value": "int"
+      },
+      {
+        "name": "ga_session_id",
+        "value": "int"
+      },
+      {
+        "name": "firebase_event_origin",
+        "value": "string"
+      },
+      {
+        "name": "ga_session_number",
+        "value": "int"
+      }
+    ]
+  },
+  {
+    "event_name": "app_update",
+    "attribute": [
+      {
+        "name": "engaged_session_event",
+        "value": "int"
+      },
+      {
+        "name": "previous_app_version",
+        "value": "string"
+      },
+      {
+        "name": "firebase_event_origin",
+        "value": "string"
+      },
+      {
+        "name": "ga_session_number",
+        "value": "int"
+      },
+      {
+        "name": "firebase_screen_id",
+        "value": "int"
+      },
+      {
+        "name": "ga_session_id",
+        "value": "int"
+      },
+      {
+        "name": "firebase_screen_class",
+        "value": "string"
+      }
+    ]
+  }
+]
+```
+
 Hope this helps.
