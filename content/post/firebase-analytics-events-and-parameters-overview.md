@@ -9,21 +9,21 @@ As I mentioned in my earlier [post about the drawbacks with the entity-attribute
 
 ```SQL
 SELECT 
-event_name, 
-ARRAY_AGG(struct(name, value)) as attribute FROM(
-SELECT 
   event_name, 
-  param.key as name, 
-  CASE
-    WHEN param.value.string_value is not null THEN "string"
-    WHEN param.value.int_value is not null THEN "int"
-    WHEN param.value.double_value is not null THEN "double"
-    WHEN param.value.float_value is not null THEN "float"
-  END as value
-  FROM `<project>.<dataset>.events_20190902`, UNNEST(event_params) as param
-  GROUP BY event_name, name, value)
-GROUP BY event_name
-ORDER BY event_name asc
+  ARRAY_AGG(struct(name, value)) as attribute FROM(
+  SELECT 
+    event_name, 
+    param.key as name, 
+    CASE
+      WHEN param.value.string_value is not null THEN "string"
+      WHEN param.value.int_value is not null THEN "int"
+      WHEN param.value.double_value is not null THEN "double"
+      WHEN param.value.float_value is not null THEN "float"
+    END as value
+    FROM `<project>.<dataset>.events_20190902`, UNNEST(event_params) as param
+    GROUP BY event_name, name, value)
+  GROUP BY event_name
+  ORDER BY event_name asc
 ```
 
 That would return something like below (in JSON format)
