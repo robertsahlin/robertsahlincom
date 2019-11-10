@@ -1,11 +1,25 @@
 ---
 title: "Schema evolution in streaming Dataflow jobs and BigQuery tables"
 date: 2019-11-10T7:50:33+01:00
-draft: false
+draft: true
 tags: ["DataHem", "Protobuf", "Schema", "Apache Beam", "BigQuery", "Dataflow"]
 ---
 
-In the previous post, I gave an overview of MatHem's streaming analytics platform DataHem. This post will focus on how we manage schema evolution without sacrificing real-time data or having downtime in our data ingestion.
+In the [previous post](https://robertsahlin.com/fast-and-flexible-data-pipelines-with-protobuf-schema-registry/), I gave an overview of MatHem's streaming analytics platform DataHem. This post will focus on how we manage schema evolution without sacrificing real-time data or having downtime in our data ingestion.
+
+The streaming analytics platform is built entirely on Google Cloud Platform and use services such as Dataflow, BigQuery and PubSub extensively. Another important component are protobuf schemas. 
+
+# 1 Protobuf Schemas
+
+## 1.1 Dynamic messages
+The raw data emitted from source is often JSON, which is easy to read for humans but has multiple drawbacks when building an analytics platform. Protobuf schemas let us apply contracts early in the processing of entities and ensures that downstream consumers don't break when the schema evolves. Protobuf schemas can be used to either generate message classes in various programming languages or a descriptor file that can be used to serialize/deserialize dynamic messages. We primarily use dynamic messages since it allows us to use generic Dataflow (Apache Beam) pipelines together with the descriptor file stored in cloud storage.
+
+## 1.2 Schema evolution and naming
+The protobuf schema has certain rules for schema evolution that fit BigQuery quite well:
+
+## 1.3 Schema options
+The protobuf schema also support options that we can use to annotate processing logic both on field level and message level.
+
 
 # 1 Background
 Before jumping into the solution architecture, I thought I would give you some background from a business perspective that has influenced the design choices.
