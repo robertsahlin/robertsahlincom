@@ -19,6 +19,38 @@ Why do we want protocol buffers to start with? The reasons are primarily two:
 ## 1.1 Proto files
 folder structure
 
+```
+syntax = "proto3";
+package mathem.distribution.tms_truck_temperature.truck_temperature.v1;
+
+import "datahem/options/options.proto";
+
+option java_multiple_files = true;
+option java_package = "se.mathem.protobuf.tms.truck.temperature.v1";
+
+message TruckTemperature {
+    option (datahem.options.BigQueryTableDescription) =  "Truck temperatures from AWS";
+    
+    double Temperature = 1 [
+        (datahem.options.BigQueryFieldDescription) = "Truck temperature in celsius",
+        (datahem.options.BigQueryFieldUseDefaultValue) = "false"
+    ];
+    
+    string Car = 2 [
+        (datahem.options.BigQueryFieldDescription) = "Truck ID/name"
+    ];
+    
+    string Timestamp = 3 [
+        (datahem.options.BigQueryFieldDescription) = "Timestamp (UTC) for when the temperature was logged.", 
+            (datahem.options.BigQueryFieldType) = "TIMESTAMP"
+    ];
+    
+    map<string,string> _ATTRIBUTES = 300 [
+        (datahem.options.BigQueryFieldDescription) = "Message meta-data." 
+    ];
+}
+```
+
 ## 1.2 Schema options
 
 
