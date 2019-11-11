@@ -2,24 +2,51 @@
 title: "Schema evolution in streaming Dataflow jobs and BigQuery tables"
 date: 2019-11-10T7:50:33+01:00
 draft: true
-tags: ["DataHem", "Protobuf", "Schema", "Apache Beam", "BigQuery", "Dataflow"]
+tags: ["DataHem", "Protobuf", "Protocol Buffers", "Schema", "Apache Beam", "BigQuery", "Dataflow"]
 ---
 
 In the [previous post](https://robertsahlin.com/fast-and-flexible-data-pipelines-with-protobuf-schema-registry/), I gave an overview of MatHem's streaming analytics platform DataHem. This post will focus on how we manage schema evolution without sacrificing real-time data or having downtime in our data ingestion.
 
 The streaming analytics platform is built entirely on Google Cloud Platform and use services such as Dataflow, BigQuery and PubSub extensively. Another important component are protobuf schemas. 
 
-# 1 Protobuf Schemas
+# 1 Protocol buffers
+There are many different frameworks for serialization/deserialization of data. We actually started with Avro and even built custom JSON parser and a GCP Datastore schema registry before we decided that protocol buffers suited us better. [Protocol buffers](https://developers.google.com/protocol-buffers) is a flexible, efficient way of serializing structured data. You define how you want your data to be structured in a schema file (.proto), then you generate source code in a variety of supported languages to easily write and read your structured data (messages) to and from a variety of data streams. You can even update your data structure without breaking deployed programs that are compiled against the "old" format.
 
-## 1.1 Dynamic messages
-The raw data emitted from source is often JSON, which is easy to read for humans but has multiple drawbacks when building an analytics platform. Protobuf schemas let us apply contracts early in the processing of entities and ensures that downstream consumers don't break when the schema evolves. Protobuf schemas can be used to either generate message classes in various programming languages or a descriptor file that can be used to serialize/deserialize dynamic messages. We primarily use dynamic messages since it allows us to use generic Dataflow (Apache Beam) pipelines together with the descriptor file stored in cloud storage.
+Why do we want protocol buffers to start with? The reasons are primarily two:
+1. Most of the incoming data is in JSON format which is easy to read for humans but has multiple drawbacks when building an analytics platform. Protobuf schemas let us apply contracts early in the processing of entities and ensures that downstream consumers don't break when the schema evolves. The rules for [schema evolution in protobuf](https://developers.google.com/protocol-buffers/docs/proto3#updating) are similar to the ones in BigQuery (except for field removal or renaming fields).
+2. The schema allows us to annotate processing logic on both message and field level that enable us to build more generic processing pipelines that can be reused for multiple data objects. This is facilitated by the use of protobuf [dynamic messages](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
 
-## 1.2 Schema evolution and naming
-The protobuf schema has certain rules for schema evolution that fit BigQuery quite well:
+## 1.1 Proto files
+folder structure
+
+## 1.2 Schema options
+
+
+## 1.3 Dynamic messages
+Protobuf schemas can be used to either generate message classes in various programming languages or a descriptor file that can be used to serialize/deserialize dynamic messages. We primarily use dynamic messages since it allows us to process various data objects using the same generic Dataflow (Apache Beam) pipelines together with the descriptor file stored in cloud storage (i.e. like a schema repository).
+
+## 1.4 Generate descriptor file and upload to cloud storage
+
 
 ## 1.3 Schema options
 The protobuf schema also support options that we can use to annotate processing logic both on field level and message level.
 
+# Dataflow job updates
+We use dataflow to process streaming data from pubsub and write to BigQuery in streaming mode. Many of the data objects are processed in a similar way, it’s just the schema that differs. Hence we’ve built a generic dataflow pipeline and specify processing logic in protobuf schemas using message and field options.
+
+## Generic pipeline
+
+## Update job
+
+# BigQuery table patching
+
+# Cloud Build
+
+## Trigger
+
+## Master build
+
+## Sub-builds
 
 # 1 Background
 Before jumping into the solution architecture, I thought I would give you some background from a business perspective that has influenced the design choices.
