@@ -17,7 +17,17 @@ Why do we want protocol buffers to start with? The reasons are primarily two:
 2. The schema allows us to annotate processing logic on both message and field level that enable us to build more generic processing pipelines that can be reused for multiple data objects. This is facilitated by the use of protobuf [dynamic messages](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
 
 ## 1.1 Proto files
-Our data objects are described in proto files. Below is a simple example of how we represent truck temperatures that are streamed from a microservice in AWS. As an online grocery store, keeping track on the temperatures in our trucks is very important. But most of our data objects (orders, members, products, etc.) are more complex and contain more than 100 fields in nested and repeated structures.
+Our data objects are described in proto files. Below is a simple example of how we represent truck temperatures that are streamed from a microservice in AWS. As an online grocery store, keeping track on the temperatures in our trucks is very important. The JSON-object we receive in our cloud functions collector looks like:
+
+```json
+{
+  "Temperature":3.0,
+  "Car":"D53",
+  "Timestamp":"2019-11-11 13:13:52"
+}
+```
+
+But most of our data objects (orders, members, products, etc.) are more complex and contain more than 100 fields in nested and repeated structures. The corresponding protobuf schema looks like:
 
 ```
 syntax = "proto3";
