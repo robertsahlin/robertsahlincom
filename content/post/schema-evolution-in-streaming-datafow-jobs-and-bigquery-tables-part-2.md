@@ -1,7 +1,7 @@
 ---
 title: "Schema evolution in streaming Dataflow jobs and BigQuery tables, part 2"
 date: 2019-11-13T7:50:33+01:00
-draft: true
+draft: false
 tags: ["DataHem", "Protobuf", "Schema", "Apache Beam", "BigQuery", "Dataflow"]
 ---
 
@@ -103,3 +103,6 @@ The application loops through one or multiple patches and tables and support set
 This post will be updated with links to both source code (it's open source) and a dockerhub image.
 
 The resulting BigQuery table schema looks like below:
+![BigQuery Table Schema](https://raw.githubusercontent.com/mhlabs/datahem/master/images/bigquery_table_schema.png)
+
+In the next post (part 3) I will focus on the Dataflow pipeline and how we update it.
