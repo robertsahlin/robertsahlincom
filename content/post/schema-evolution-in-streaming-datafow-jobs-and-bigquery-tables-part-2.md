@@ -17,7 +17,7 @@ All other schema modifications are unsupported and require manual workarounds, f
 
 Hence, the schema evolution I refer to is basically adding fields, but that is also 90% of our cases. If we want to make breaking changes (according to protobuf rules) we basically make a new table with a new major version. If it is a protobuf non-breaking change (renaming or changing some data types), then we basically make a temporary table with the new schema, backfill it and then overwrite the old table with the new and update the dataflow pipeline with the new schema.
 
-[BigQuery schemas](https://cloud.google.com/bigquery/docs/schemas) is usually represented as JSON and looks like below:
+[BigQuery schemas](https://cloud.google.com/bigquery/docs/schemas) are usually represented as JSON and looks like below:
 
 ```json
 [
@@ -66,6 +66,40 @@ BigQuery performs best when your data is denormalized. Rather than preserving a 
 
 Hence, we try to keep tables denormalized, mirroring the data objects we receive from our microservices. The truck temperature object above is a very simple example of a data object we have at MatHem, most objects (such as orders, subscriptions, products, members, etc.) contain more than 100 fields in a nested/repeated structure.
 
-However, we don't work with the JSON schema at all, instead we use the (TableSchema class](https://developers.google.com/resources/api-libraries/documentation/bigquery/v2/java/latest/) in the BigQuery API Client Library for Java in a small application named DataHem.Patcher.
+However, we don't work with the JSON schema at all, instead we use the [TableSchema class](https://developers.google.com/resources/api-libraries/documentation/bigquery/v2/java/latest/) in the BigQuery API Client Library for Java in a small application named DataHem.Patcher.
 
 ## 2.2 DataHem.Patcher
+DataHem.Patcher is a Java application that I developed to patch BigQuery table schemas from a descriptor file (see part 1 in this series of posts) stored in cloud storage. The application is invoked with a configuration as below:
+
+```json
+{
+        "patches":[
+            {
+                "fileDescriptorBucket":"${_PROJECT_ID}-descriptor",
+                "fileDescriptorName":"${_FILE_DESCRIPTOR_NAME}",
+                "descriptorFullName":"${_DESCRIPTOR_FULL_NAME}",
+                "policyTagPattern":"${_POLICY_TAG_PATTERN}",
+                "tables":[
+                    {
+                        "tableReference":{
+                            "projectId":"${_PROJECT_ID}",
+                            "datasetId":"${_DATASET}",
+                            "tableId":"${_TABLE}_staging"
+                        },
+                        "createDisposition":"CREATE_IF_NEEDED",
+                        "timePartitioning":{
+                            "field":null,
+                            "requirePartitionFilter": true
+                        },
+                        "clustering":{
+                            "fields":[]
+                        }
+                    }
+         ]
+ }
+```
+The application loops through one or multiple patches and tables and support settings such as create disposition, time partitioning and clustering. The actual fields are described in the descriptor file under the specified descriptor name. The application checks if the current (old) table schema is equal to the "new" schema and if true then do nothing, if false then patch.
+
+This post will be updated with links to both source code (it's open source) and a dockerhub image.
+
+The resulting BigQuery table schema looks like below:
