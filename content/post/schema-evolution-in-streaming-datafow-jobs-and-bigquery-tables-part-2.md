@@ -103,6 +103,6 @@ The application loops through one or multiple patches and tables and support set
 This post will be updated with links to both source code (it's open source) and a dockerhub image.
 
 The resulting BigQuery table schema looks like below:
-![BigQuery Table Schema](https://raw.githubusercontent.com/mhlabs/datahem/master/images/bigquery_table_schema.png)
+![BigQuery Table Schema](/images/bigquery_table_schema.png)
 
 In the next post (part 3) I will focus on the Dataflow pipeline and how we update it.
