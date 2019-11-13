@@ -151,3 +151,5 @@ protoc -I/usr/local/include -I=./proto --java_out=./src/main/java/ $(find proto 
 protoc -I/usr/local/include -I=./proto --descriptor_set_out=schemas.desc --include_imports $(find proto -iname "*.proto")
 ```
 I've also packaged it as a docker image that I've published on dockerhub that you can use in cloud build to generate your descriptor file and upload it to cloud storage. But that will be covered in a later part in how to automate all steps with google cloud build.
+
+[Read part 2 (patching BigQuery tables) here](https://robertsahlin.com/schema-evolution-in-streaming-dataflow-jobs-and-bigquery-tables-part-2/).
