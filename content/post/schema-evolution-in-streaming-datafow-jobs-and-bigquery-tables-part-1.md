@@ -9,6 +9,8 @@ In the [previous post](https://robertsahlin.com/fast-and-flexible-data-pipelines
 
 The streaming analytics platform is built entirely on Google Cloud Platform and use services such as Dataflow, BigQuery and PubSub extensively. Another important component are protobuf schemas. 
 
+![DataHem Architecture](/images/datahem_architecture_v2.png)
+
 # 1 Protocol buffers
 There are many different frameworks for serialization/deserialization of data. We actually started with Avro and even built custom JSON parser and a GCP Datastore schema registry before we decided that protocol buffers suited us better. [Protocol buffers](https://developers.google.com/protocol-buffers) is a flexible, efficient way of serializing structured data. You define how you want your data to be structured in a schema file (.proto), then you generate source code in a variety of supported languages to easily write and read your structured data (messages) to and from a variety of data streams. You can even update your data structure without breaking deployed programs that are compiled against the "old" format.
 
