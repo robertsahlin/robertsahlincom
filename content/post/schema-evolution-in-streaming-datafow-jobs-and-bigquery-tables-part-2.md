@@ -7,6 +7,8 @@ tags: ["DataHem", "Protobuf", "Schema", "Apache Beam", "BigQuery", "Dataflow"]
 
 In the [previous post](https://robertsahlin.com/schema-evolution-in-streaming-dataflow-jobs-and-bigquery-tables-part-1/), I covered the protobuf (schema definition) part of the solution.  This post will focus on how we create or patch BigQuery tables without interrupting the real-time ingestion.
 
+![DataHem Architecture](/images/datahem_architecture_v2.png)
+
 # 2 BigQuery
 BigQuery is Google’s serverless data warehouse, and it is awesome (and I've experience from Hive, Presto, SparkSQL, Redshift, Microsoft PDW, ...). It is a scalable data solution that helps companies store and query their data or apply machine learning models.
 
