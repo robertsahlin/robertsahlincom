@@ -1,7 +1,7 @@
 ---
 title: "Schema evolution in streaming Dataflow jobs and BigQuery tables, part 2"
 date: 2019-11-30T7:50:33+01:00
-draft: true
+draft: false
 tags: ["DataHem", "Protobuf", "Schema", "Apache Beam", "BigQuery", "Dataflow"]
 ---
 
