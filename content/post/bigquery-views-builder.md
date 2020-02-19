@@ -19,7 +19,7 @@ cloudbuild.yaml
 The cicd.sh
 ```bash
 #!/bin/sh
-#./cicd.sh mathem-ml-datahem-test views EU
+#./cicd.sh my-project-id views EU
 project_id=$1
 views_dir=$2
 location=${3:-EU}  
