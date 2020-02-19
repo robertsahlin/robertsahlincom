@@ -21,20 +21,23 @@ Your view...sql files should follow the DDL syntax for views but replace the pro
 
 Example:
 ```sql
-CREATE OR REPLACE VIEW `<project_id>.audit.view_bq_hourly_cost`
+CREATE OR REPLACE VIEW `<project_id>.commerce.view_cart_v1_reporting_latest`
 OPTIONS(
-description="view BigQuery cost per hour"
+description="the latest representation of each cart"
 )
-AS SELECT
-  FORMAT_TIMESTAMP('%F', protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime, 'Europe/Stockholm') as day,
-  FORMAT_TIMESTAMP('%H:00', protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime, 'Europe/Stockholm') as hour,
-  FORMAT('%9.2f',50.0 * (SUM(protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalBilledBytes)/POWER(2, 40))) as Estimated_SEK_Cost
-FROM
-  `<project_id>.audit.cloudaudit_googleapis_com_data_access_*`
-WHERE
-  protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.eventName = 'query_job_completed'
-GROUP BY day, hour
-ORDER BY day, hour DESC
+AS
+SELECT * EXCEPT(row_number)
+  FROM (
+   SELECT
+     *,
+     ROW_NUMBER() OVER(PARTITION BY Id ORDER BY PartitionTimestamp DESC) row_number
+   FROM(
+    SELECT * FROM `<project_id>.commerce.cart_v1_reporting_timeseries`
+      UNION ALL
+    SELECT * FROM `<project_id>.commerce.cart_v1_staging` WHERE _PARTITIONDATE >= DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY)
+   )
+  ) 
+  WHERE row_number = 1
 ```
 
 The cicd.sh
