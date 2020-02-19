@@ -77,4 +77,6 @@ Build the Docker image:
 $ gcloud builds submit --config cloudbuild.yaml .
 ```
 
-Go to google cloud build, connect your github repository and create a trigger that listens to changes in your branch of choice, chose cloudbuild config and give it the path cloudbuild.yaml. Make sure you have enabled api:s for container registry and cloud build and that your <projectnumber>@cloudbuild.gserviceaccount.com has BigQuery Data Editor role in the project's IAM.
+Go to google cloud build, connect your github repository and create a trigger that listens to changes in your branch of choice, chose cloudbuild config and give it the path cloudbuild.yaml. Make sure you have enabled api:s for container registry and cloud build and that your projectnumber@cloudbuild.gserviceaccount.com has BigQuery Data Editor role in the project's IAM.
+
+This is a small part of DataHem, our data platform at MatHem which we have open sourced to a large degree. Reach out on robert.sahlin[at]gmail.com or connect on [linkedin](https://www.linkedin.com/in/robertsahlin/) if you want to know more.
