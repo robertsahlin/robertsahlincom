@@ -9,11 +9,32 @@ We (MatHem) has finally moved our BigQuery view definitions to GitHub and automi
 
 It's a very simple setup and requires a github repo, cloud build and bigquery.
 
-The github repo should look like:
+The github repo should look like below where the folders under view will be the datasets in your BigQuery project:
 ```
-/views
+/views/commerce/view_orders.sql
+               /view_products.sql
+      /payments/view_invoices.sql
 cicd.sh
 cloudbuild.yaml
+```
+Your view...sql files should follow the DDL syntax for views but replace the project with <project_id> if you want it dynamically.
+
+Example:
+```sql
+CREATE OR REPLACE VIEW `<project_id>.audit.view_bq_hourly_cost`
+OPTIONS(
+description="view BigQuery cost per hour"
+)
+AS SELECT
+  FORMAT_TIMESTAMP('%F', protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime, 'Europe/Stockholm') as day,
+  FORMAT_TIMESTAMP('%H:00', protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime, 'Europe/Stockholm') as hour,
+  FORMAT('%9.2f',50.0 * (SUM(protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalBilledBytes)/POWER(2, 40))) as Estimated_SEK_Cost
+FROM
+  `<project_id>.audit.cloudaudit_googleapis_com_data_access_*`
+WHERE
+  protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.eventName = 'query_job_completed'
+GROUP BY day, hour
+ORDER BY day, hour DESC
 ```
 
 The cicd.sh
@@ -54,27 +75,12 @@ cloudbuild.yaml
 ```yaml
 # gcloud builds submit --config=cloudbuild.yaml .
 steps:
-- id: 'update views'
-  name: 'gcr.io/${PROJECT_ID}/bq:${_BQ_TAG}'
+- name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args: ['cicd.sh', '$PROJECT_ID', '${_VIEWS_DIR}']
 timeout: 1200s
 substitutions:
   _VIEWS_DIR: views
-  _BQ_TAG: latest
-```
-
-You also need to add the [bq community builder](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/bq) to your container registry before you can run the build.
-
-```bash
-#Clone the cloud-builders-community repo:
-$ git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
-
-Go to the directory that has the source code for the bq Docker image:
-$ cd cloud-builders-community/bq
-
-Build the Docker image:
-$ gcloud builds submit --config cloudbuild.yaml .
 ```
 
 Go to google cloud build, connect your github repository and create a trigger that listens to changes in your branch of choice, chose cloudbuild config and give it the path cloudbuild.yaml. Make sure you have enabled api:s for container registry and cloud build and that your projectnumber@cloudbuild.gserviceaccount.com has BigQuery Data Editor role in the project's IAM.
