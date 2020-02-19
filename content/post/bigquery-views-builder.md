@@ -1,5 +1,5 @@
 ---
-title: "Automatic builds and version control of your BigQuery schemas"
+title: "Automatic builds and version control of your BigQuery views"
 date: 2020-02-19T7:50:33+01:00
 draft: false
 tags: ["DataHem","BigQuery", "Views", "Cloud Build"]
