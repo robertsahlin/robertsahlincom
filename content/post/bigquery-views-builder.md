@@ -9,6 +9,8 @@ We (MatHem) has finally moved our BigQuery view definitions to GitHub and automi
 
 Below are two ways to set it up and requires a github repo, cloud build and bigquery.
 
+There is a template in github for the "advanced" setup that you can clone at [https://github.com/robertsahlin/bigquery-views-builder](https://github.com/robertsahlin/bigquery-views-builder)
+
 # Simple setup
 
 The github repo should look like below where the folders under view will be the datasets in your BigQuery project:
