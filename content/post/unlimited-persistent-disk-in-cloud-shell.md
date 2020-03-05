@@ -18,6 +18,6 @@ If you don't want to mount gcs manually everytime you start the cloud shell, you
 .customize_environment
 ```shell
 #!/bin/sh
-gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --debug_gcs rs-gcsfuse /home/robert_sahlin/external
+gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --debug_gcs [BUCKET_NAME] /home/firstname_lastname/[FOLDER_NAME]
 /home/robert_sahlin/code-server2.1523-vsc1.38.1-linux-x86_64/code-server --no-auth --port 8083
 ```
