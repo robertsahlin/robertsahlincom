@@ -53,5 +53,6 @@ To start VS Code Server on boot, check your installed version of VS Code Server 
 ```shell
 #!/bin/sh
 gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --uid=1000 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
-/home/[USER]/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
+sleep 20
+sudo -u [USER] /home/[USER]/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
 ```
