@@ -23,7 +23,8 @@ If you don't want to mount gcs manually everytime you start the cloud shell, you
 
 ```shell
 #!/bin/sh
-gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --uid=1000 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
+sleep 20
+sudo -u [USER] gcsfuse -o nonempty -file-mode=777 -dir-mode=777 --uid=1000 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
 ```
 
 To install VS Code Server
