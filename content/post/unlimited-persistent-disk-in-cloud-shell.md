@@ -9,7 +9,9 @@ I use google cloud shell as my primary development environment. By doing that I 
 
 ![Unlimited persistent disk in cloud shell](/images/unlimited-persistent-disk.png)
 
+
 ```shell
+# Replace [BUCKET_NAME], [USER] and [FOLDER_NAME] with yours 
 gsutil mb gs://[BUCKET_NAME]/
 mkdir /home/[USER]/[FOLDER_NAME]
 chmod 777 /home/[USER]/[FOLDER_NAME]
@@ -21,7 +23,7 @@ If you don't want to mount gcs manually everytime you start the cloud shell, you
 ```shell
 #!/bin/sh
 gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --uid=1000 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
-external/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
+/home/[USER]/external/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
 ```
 
 To install VS Code Server in the mounted folder
