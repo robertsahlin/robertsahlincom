@@ -20,8 +20,8 @@ If you don't want to mount gcs manually everytime you start the cloud shell, you
 .customize_environment
 ```shell
 #!/bin/sh
-gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
-external/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth-none --port 8082
+gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --uid=1000 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
+external/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
 ```
 
 To install VS Code Server in the mounted folder
@@ -35,5 +35,5 @@ rm -f /home/[USER]/external/code-server$VERSION_NAME-linux-x86_64.tar.gz
 To start VS Code Server manually
 
 ```shell
-external/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth-none --port 8082
+external/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
 ```
