@@ -16,24 +16,15 @@ mkdir /home/[USER]/[FOLDER_NAME]
 chmod 777 /home/[USER]/[FOLDER_NAME]
 gcsfuse -o nonempty -file-mode=777 -dir-mode=777 [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
 ```
+
 If you don't want to mount gcs manually everytime you start the cloud shell, you can always add the gcsfuse command to a file named .customize_environment in your home directory (i.e. /home/[USER]/.customize_environment). I also use to start up a Visual Studio server which I use as IDE on port 8083 in web preview. Unfortunately the Theia editor won't pick up the mounted drive since Thei is started before mounting, and I honestly don't know how to restart it, I guess killing the process and starting it is one way but it doesn't feel right...
 
 .customize_environment
+
 ```shell
 #!/bin/sh
 gcsfuse -o allow_other -o nonempty -file-mode=777 -dir-mode=777 --uid=1000 --debug_gcs [BUCKET_NAME] /home/[USER]/[FOLDER_NAME]
 ```
-
-export VERSION_NAME=$(curl -s https://api.github.com/repos/cdr/code-server/releases/latest | jq -r .name)
-export VERSION_TAG=$(curl -s https://api.github.com/repos/cdr/code-server/releases/latest | jq -r .tag_name)
-wget https://github.com/cdr/code-server/releases/download/$VERSION_TAG/code-server$VERSION_NAME-linux-x86_64.tar.gz
-tar -xvzf /home/robert_sahlin/code-server$VERSION_NAME-linux-x86_64.tar.gz --directory /home/robert_sahlin/
-rm -f /home/robert_sahlin/code-server$VERSION_NAME-linux-x86_64.tar.gz
-
-/home/robert_sahlin/code-server$VERSION_NAME-linux-x86_64/code-server --auth none --port 8082
-
-/home/robert_sahlin/code-server2.1698-vsc1.41.1-linux-x86_64/code-server --auth none --port 8082
-
 
 To install VS Code Server
 ```shell
@@ -43,6 +34,7 @@ wget https://github.com/cdr/code-server/releases/download/$VERSION_TAG/code-serv
 tar -xvzf /home/[USER]/code-server$VERSION_NAME-linux-x86_64.tar.gz --directory /home/[USER]/
 rm -f /home/[USER]/code-server$VERSION_NAME-linux-x86_64.tar.gz
 ```
+
 To start VS Code Server manually
 
 ```shell
@@ -50,6 +42,7 @@ code-server$VERSION_NAME-linux-x86_64/code-server --auth none --port 8082
 ```
 
 To start VS Code Server on boot, check your installed version of VS Code Server and edit .customize_environment (replace path to code server with your current version)
+
 ```shell
 #!/bin/sh
 sleep 20
