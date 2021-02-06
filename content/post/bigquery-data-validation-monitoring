@@ -41,4 +41,11 @@ Now you can create scheduled query in BigQuery using a validation query like the
 
 But it doesn't stop there. Getting alerts in your email is great, but you probably want a more sophisticated way to monitor your validation. Enter Cloud Logging and Cloud Monitoring.
 
-First, open the [legacy logs viewer](https://console.cloud.google.com/logs/viewer). 
+First, open the [legacy logs viewer](https://console.cloud.google.com/logs/viewer). And filter entries with something like below and you should see the entry representing your failed job.
+
+```
+resource.type="bigquery_project"
+resource.labels.location="EU"
+severity>=ERROR
+```
+Now click the Create Metric button in the top of the screen and a side bar will open to define your log based metric. Give it a name and description, but also custom labels such as error_message defined with field name "protoPayload.status.message". When saved you will find it under "User defined metrics" in the [Logs based metrics menu](https://console.cloud.google.com/logs/metrics). Click the symbol with three bullets to the right for your new metric and chose create alert, that will take you to [cloud monitoring > alerts](https://console.cloud.google.com/monitoring/alerting). Give your policy a name and set treshold configuration and save. Now you have a metric dashboard and alerts for your validation errors.
