@@ -4,9 +4,10 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/hugo'
 #  args: ['-t', 'casper','-v']
 - name: 'gcr.io/$PROJECT_ID/firebase'
-  args: ['deploy']
-  secretEnv: ['FIREBASE_TOKEN']
-secrets:
-- kmsKeyName: 'projects/robertsahlinblog/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-token'
-  secretEnv:
-    FIREBASE_TOKEN: 'CiQAi2+d7YudYIJRK2vYEcmZW5N4hedQFJ1yeq/G+FGemjTLT0wSVgA3JWDt4IxwWKxtfse0/QoEWROndlCRZHmgvRYJCejfFnBkCL5pNGuu/K0K7wqIxErGMm3LifpWzGsF5W/bI/DU1HXygycsep8NI5zZXiy4v/lj2Lsh'
+  args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']
+#  args: ['deploy']
+#  secretEnv: ['FIREBASE_TOKEN']
+#secrets:
+#- kmsKeyName: 'projects/robertsahlinblog/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-token'
+#  secretEnv:
+#    FIREBASE_TOKEN: 'CiQAi2+d7YudYIJRK2vYEcmZW5N4hedQFJ1yeq/G+FGemjTLT0wSVgA3JWDt4IxwWKxtfse0/QoEWROndlCRZHmgvRYJCejfFnBkCL5pNGuu/K0K7wqIxErGMm3LifpWzGsF5W/bI/DU1HXygycsep8NI5zZXiy4v/lj2Lsh'
