@@ -1,6 +1,4 @@
 steps:
-#- name: gcr.io/cloud-builders/git
-#  args: ['fetch', '--unshallow']
 - name: 'gcr.io/$PROJECT_ID/hugo'
 #  args: ['-t', 'casper','-v']
 - name: 'gcr.io/$PROJECT_ID/firebase'
