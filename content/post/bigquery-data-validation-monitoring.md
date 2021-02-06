@@ -9,7 +9,7 @@ Data observability has gained huge momentum and data quality is essential for an
 
 So, how to validate your data in BigQuery? There are a number of approaches (rules, statistical tests, ML) to unit test your data or identifying anomalies:
 
-- Airflow (Cloud Composer) BigQuery 
+- Airflow (Cloud Composer) BigQuery operators
 - BigQuery scheduled queries + cloud monitoring
 - Open source (Great Expectations, Tensorflow Data Validation, Deequ, Apache Griffin, etc.)
 - Third party services (Monte Carlo, Validio, etc.)
