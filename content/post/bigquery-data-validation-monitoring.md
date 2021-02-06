@@ -50,4 +50,10 @@ resource.type="bigquery_project"
 resource.labels.location="EU"
 severity>=ERROR
 ```
-Now click the Create Metric button in the top of the screen and a side bar will open to define your log based metric. Give it a name and description, but also custom labels such as error_message defined with field name "protoPayload.status.message". When saved you will find it under "User defined metrics" in the [Logs based metrics menu](https://console.cloud.google.com/logs/metrics). Click the symbol with three bullets to the right for your new metric and chose create alert, that will take you to [cloud monitoring > alerts](https://console.cloud.google.com/monitoring/alerting). Give your policy a name and set treshold configuration and save. Now you have a metric dashboard and alerts for your validation errors.
+![logs viewer](/images/logs-viewer.png)
+
+Now click the Create Metric button in the top of the screen and a side bar will open to define your log based metric. Give it a name and description, but also custom labels such as error_message defined with field name "protoPayload.status.message". 
+
+![user defined metrics](/images/user-defined-metrics.png)
+
+When saved you will find it under "User defined metrics" in the [Logs based metrics menu](https://console.cloud.google.com/logs/metrics). Click the symbol with three bullets to the right for your new metric and chose create alert, that will take you to [cloud monitoring > alerts](https://console.cloud.google.com/monitoring/alerting). Give your policy a name and set treshold configuration and save. Now you have a metric dashboard and alerts for your validation errors.
