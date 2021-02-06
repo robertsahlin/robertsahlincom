@@ -57,3 +57,5 @@ Now click the Create Metric button in the top of the screen and a side bar will 
 ![user defined metrics](/images/user-defined-metric.png)
 
 When saved you will find it under "User defined metrics" in the [Logs based metrics menu](https://console.cloud.google.com/logs/metrics). Click the symbol with three bullets to the right for your new metric and chose create alert, that will take you to [cloud monitoring > alerts](https://console.cloud.google.com/monitoring/alerting). Give your policy a name and set treshold configuration and save. Now you have a metric dashboard and alerts for your validation errors.
+
+![alerting plicy](/images/alerting-policy.png)
