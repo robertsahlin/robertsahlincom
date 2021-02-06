@@ -38,6 +38,7 @@ FROM(
 ```
 
 Now you can create scheduled query in BigQuery using a validation query like the one above (one that throws an error if it doesn't meet expected result). If you set the option to send email notifications, then you will receive an email when your validation job fails (throws an error). The email contains a brief explanation and a link to the scheduled job. Easy as pie!
+![BigQuery scheduled query notification email](/images/bigquery-scheduled-query-notification.png)
 
 But it doesn't stop there. Getting alerts in your email is great, but you probably want a more sophisticated way to monitor your validation. Enter Cloud Logging and Cloud Monitoring.
 
