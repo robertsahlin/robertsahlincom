@@ -33,3 +33,7 @@ severity>=ERROR
 
 Now you should be able to see you newly created sink in the [logs router](https://console.cloud.google.com/logs/router).
 
+Enable the [stackdriver error reporting api](https://console.cloud.google.com/apis/api/clouderrorreporting.googleapis.com/overview).
+
+Give the service account you use for the cloud function error reporting admin role.
+
