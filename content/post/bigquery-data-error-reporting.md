@@ -1,3 +1,9 @@
+---
+title: "BigQuery data error reporting"
+date: 2021-02-06T13:50:33+01:00
+draft: true
+tags: ["BigQuery", "Validation", "Observability"]
+---
 
 This is part 2 in a series of data observability in GCP using only GCP native services (i.e. no third party tools or libraries). You find the first part [here](/validate-and-monitor-your-bigquery-data/).
 
