@@ -12,28 +12,45 @@ If you followed part 1 you now have:
 - scheduled data quality checks as SQL queries using BigQuery scheduled queries
 - email alerts when mentioned queries report data quality errors
 - logging of data quality errors
-- a user defined data quality error metric
-- a dashboard you can use to set alert thresholds in cloud monitoring
+- a basic user defined data quality error metric
+- a basic dashboard you can use to set alert thresholds in cloud monitoring
 
 That's awesome. But now you want to take action on the errors in a structured way and even if e-mail is great it isn't the best place to get a sense of how frequent the error is and its status (raised, acknowledeged, resolved, etc.), especially if you are a data engineering team working on fixing alerts. So how can you accomplish that on GCP?
 
-Enter [Error Reporting](https://cloud.google.com/error-reporting). This is a great service to analyze your errors in realtime, it also offers more advance notifications than what you get from BigQuery scheduled queries, you can even link errors to your issue tracker if you need to. The drawback, it currently only works for applications (cloud functions, cloud run, app engine, etc.) and not BigQuery.
+We will take advantage of the [cloud monitoring](https://console.cloud.google.com/monitoring) features and level up our data quality monitoring.  
 
-So we just create a cloud function to report BigQuery data quality errors for us. But first we need to create a data quality [pubsub topic](https://console.cloud.google.com/cloudpubsub/topic/list) and name it to something like "data-quality-errors". 
-
-Go back to the [legacy log viewer](https://console.cloud.google.com/logs/viewer) and click on the button "create sink" (top menu). Create a sink according to the picture below and use a log inclusion filter like this one.
+First, we will add extra labels to our bigquery_validation_metric to enable better filtering in cloud monitoring. Go back to the user defined metrics in [legacy log viewer](https://console.cloud.google.com/logs/metrics) and click on "edit" of the bigquery_valiation_metric you created in the previous post. Then add a label "job_name" of type String and field name:
 
 ```
-resource.type="bigquery_project"
-resource.labels.location="EU"
-severity>=ERROR
+protoPayload.metadata.jobChange.job.jobName
 ```
 
-![picture](/images/logs-routing-sink.png)
+Do the same with a "query" label defined by field name:
+```
+protoPayload.metadata.jobChange.job.jobConfig.queryConfig.query
+```
 
-Now you should be able to see you newly created sink in the [logs router](https://console.cloud.google.com/logs/router).
+Update your metric and go to cloud monitoring. In order to get [alerts](https://console.cloud.google.com/monitoring/alerting) when BigQuery data quality errors are logged you need to [create a policy](https://console.cloud.google.com/monitoring/alerting/policies/create). Here's the [official guide/documentation](https://cloud.google.com/monitoring/alerts/using-alerting-ui#create-policy) but I will give some extra guidance for this particular use case.
 
-Enable the [stackdriver error reporting api](https://console.cloud.google.com/apis/api/clouderrorreporting.googleapis.com/overview).
+1. Add condition
+When adding a condition, add the following MQL in the query editor. Make sure to set a period long enough for you to act on the alert so that it doesn't "self heal" due to the aggregation period being to short. In the example below the period is set to 30 days, but probably something like 7 days is more reasonable.
 
-Give the service account you use for the cloud function error reporting admin role.
+```
+fetch bigquery_project
+| metric 'logging.googleapis.com/user/data-quality-error'
+| group_by 30d, [value_error_aggregate: aggregate(value.error)]
+| every 30d
+| group_by [metric.query, metric.job_name],
+    [value_error_aggregate_aggregate: aggregate(value_error_aggregate)]
+| condition val() > 0 '1'
+
+```
+
+2. Who should be notified
+Cloud monitoring offers a wide range of notification options. We'll use email in this case.
+
+3. What are the steps to fix the issue
+
+
+
 
