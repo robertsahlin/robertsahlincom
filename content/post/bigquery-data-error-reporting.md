@@ -73,5 +73,5 @@ When an alert fires, you will get a notification in the notification channels yo
 
 If you view the incident you will see some background containing both the job name and the query that cause the alert. Now you can acknowledge the issue by clicking the menu in the top, that will timestamp when the issue was opened. While fixing it you can add annotations to the issue to inform your team members that you are working on it and what steps you take to repair it. When you have addressed the issue it is time to close it, you do it in top menu the same way as you acknowledged it. That will timestamp the issue when it was closed and you get a value on how long it was open, i.e. duration.
 
-
+a
 
